@@ -1747,57 +1747,6 @@
         }
     },
     "definitions": {
-        ".EstadoCivil": {
-            "type": "object"
-        },
-        ".Genero": {
-            "type": "object"
-        },
-        ".GrupoEtnico": {
-            "type": "object"
-        },
-        ".GrupoSanguineoPersona": {
-            "type": "object"
-        },
-        ".Organizacion": {
-            "type": "object"
-        },
-        ".PerfilProfesional": {
-            "type": "object"
-        },
-        ".Persona": {
-            "type": "object"
-        },
-        ".PersonaEstadoCivil": {
-            "type": "object"
-        },
-        ".PersonaGenero": {
-            "type": "object"
-        },
-        ".PersonaGrupoEtnico": {
-            "type": "object"
-        },
-        ".PersonaPerfilProfesional": {
-            "type": "object"
-        },
-        ".PersonaTipoDiscapacidad": {
-            "type": "object"
-        },
-        ".RelacionPersonas": {
-            "type": "object"
-        },
-        ".TipoDiscapacidad": {
-            "type": "object"
-        },
-        ".TipoOrganizacion": {
-            "type": "object"
-        },
-        ".TipoRelacionPersonas": {
-            "type": "object"
-        },
-        ".interface{}": {
-            "type": "object"
-        },
         "models.AtributoUbicacion": {
             "title": "AtributoUbicacion",
             "type": "object",
