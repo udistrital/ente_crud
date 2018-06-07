@@ -1,6 +1,6 @@
 workspace:
   base: /go
-  path: drone/src/github.com/udistrital/ente_crud/.git/
+  path: src/github.com/udistrital/ente_crud/.git/
 
 pipeline:
    build:
