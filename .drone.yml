@@ -25,18 +25,17 @@ pipeline:
       branch: master
       event: push
 
-  publish:
 
     # build and push docker image to docker hub
-    docker:
-      image: oas0/ente_crud
-      tag:
-        - $${COMMIT:0:7}
-        - latest
-      username: $$DRONE_DOCKERID_LOGIN
-      password: $$DRONE_DOCKERID_PASSWORD
-      email: computoud@googlegroups.com
-      when:
-        branch: master
-        event: push
+  docker:
+    image: oas0/ente_crud
+    tag:
+      - $${COMMIT:0:7}
+      - latest
+    username: $$DRONE_DOCKERID_LOGIN
+    password: $$DRONE_DOCKERID_PASSWORD
+    email: computoud@googlegroups.com
+    when:
+      branch: master
+      event: push
       
