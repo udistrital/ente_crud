@@ -1,4 +1,6 @@
-build:
+pipeline:
+  
+ build:
 
   # build and test the go program
   go:
