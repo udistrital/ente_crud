@@ -1,5 +1,3 @@
-clone:
-    image: plugins/git
-    depth: 50
-    recursive: true
-    path: github.com/udistrital/ente_crud
+pipeline:
+  build:
+    image: golang:1.6
