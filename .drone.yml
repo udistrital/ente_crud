@@ -39,3 +39,4 @@ publish:
     when:
       branch: master
       event: push
+      
