@@ -1,5 +1,5 @@
 clone:
-  base: /
+  base: /home
   path: github.com/udistrital/ente_crud
 
 build:
