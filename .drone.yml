@@ -29,7 +29,7 @@ pipeline:
 
     # build and push docker image to docker hub
     docker:
-      repo: oas0/ente_crud
+      image: oas0/ente_crud
       tag:
         - $${COMMIT:0:7}
         - latest
