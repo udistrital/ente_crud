@@ -1,6 +1,6 @@
 workspace:
   base: /go
-  path: src/github.com/udistrital/ente_crud/.git/
+  path: src/github.com/udistrital/ente_crud/
 
 pipeline:
    build:
