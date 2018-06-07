@@ -1,18 +1,11 @@
-pipeline:
-  backend:
-    image: golang
-    commands:
-      - go get
-      - go build
-      - go test
+build:
 
-  frontend:
-    image: node:6
+  # build and test the go program
+  go:
+    image: golang:1.9
     commands:
-      - npm install
-      - npm test
-
-  notify:
-    image: plugins/slack
-    channel: developers
-    username: drone
+     - go get -t
+     - GOOS=linux GOARCH=amd64 go build -o main
+    when:
+      branch: develop
+      event: push
