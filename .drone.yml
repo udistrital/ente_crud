@@ -27,7 +27,7 @@ pipeline:
 
 
     # build and push docker image to docker hub
-  docker:
+  publish:
     image: docker.io/golang
     repo: oas0/ente_crud
     tag:
