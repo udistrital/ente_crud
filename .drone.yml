@@ -6,3 +6,4 @@ pipeline:
         - go build
         - go test
         
+        
