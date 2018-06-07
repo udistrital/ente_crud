@@ -28,7 +28,7 @@ pipeline:
 
     # build and push docker image to docker hub
   docker:
-    image: oas0/ente_crud
+    image: docker.io/golang
     repo: oas0/ente_crud
     tag:
       - $${COMMIT:0:7}
