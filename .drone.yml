@@ -1,5 +1,5 @@
 clone:
-  image: plugins/git
-  depth: 50
-  recursive: true
-  path: github.com/udistrital/ente_crud
+    image: plugins/git
+    depth: 50
+    recursive: true
+    path: github.com/udistrital/ente_crud
