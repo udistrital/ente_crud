@@ -1,13 +1,6 @@
-pipeline:
-  
- build:
-
-  # build and test the go program
-  go:
-    image: golang:1.9
-    commands:
-     - go get -t
-     - GOOS=linux GOARCH=amd64 go build -o main
-    when:
-      branch: develop
-      event: push
+build:
+  image: golang
+  commands:
+    - go get
+    - go build
+    - go test
