@@ -1,4 +1,5 @@
-workspace:
+clone:
+  base: /
   path: github.com/udistrital/ente_crud
 
 build:
