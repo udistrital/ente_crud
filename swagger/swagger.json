@@ -15,7 +15,7 @@
     },
     "basePath": "/v1",
     "paths": {
-        "/atributo_ubicacion/": {
+        "/atributo_ubicacion": {
             "get": {
                 "tags": [
                     "atributo_ubicacion"
@@ -188,7 +188,7 @@
                 }
             }
         },
-        "/contacto_ente/": {
+        "/contacto_ente": {
             "get": {
                 "tags": [
                     "contacto_ente"
@@ -361,7 +361,7 @@
                 }
             }
         },
-        "/ente/": {
+        "/ente": {
             "get": {
                 "tags": [
                     "ente"
@@ -534,7 +534,7 @@
                 }
             }
         },
-        "/identificacion/": {
+        "/identificacion": {
             "get": {
                 "tags": [
                     "identificacion"
@@ -707,7 +707,7 @@
                 }
             }
         },
-        "/tipo_contacto/": {
+        "/tipo_contacto": {
             "get": {
                 "tags": [
                     "tipo_contacto"
@@ -880,7 +880,7 @@
                 }
             }
         },
-        "/tipo_ente/": {
+        "/tipo_ente": {
             "get": {
                 "tags": [
                     "tipo_ente"
@@ -1053,7 +1053,7 @@
                 }
             }
         },
-        "/tipo_identificacion/": {
+        "/tipo_identificacion": {
             "get": {
                 "tags": [
                     "tipo_identificacion"
@@ -1226,7 +1226,7 @@
                 }
             }
         },
-        "/tipo_relacion_ubicacion_ente/": {
+        "/tipo_relacion_ubicacion_ente": {
             "get": {
                 "tags": [
                     "tipo_relacion_ubicacion_ente"
@@ -1399,7 +1399,7 @@
                 }
             }
         },
-        "/ubicacion_ente/": {
+        "/ubicacion_ente": {
             "get": {
                 "tags": [
                     "ubicacion_ente"
@@ -1572,7 +1572,7 @@
                 }
             }
         },
-        "/valor_atributo_ubicacion/": {
+        "/valor_atributo_ubicacion": {
             "get": {
                 "tags": [
                     "valor_atributo_ubicacion"
