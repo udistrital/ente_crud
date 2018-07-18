@@ -1219,6 +1219,9 @@ definitions:
         format: int64
       NumeroIdentificacion:
         type: string
+      Soporte:
+        type: integer
+        format: int64
       TipoIdentificacion:
         $ref: '#/definitions/models.TipoIdentificacion'
   models.TipoContacto:

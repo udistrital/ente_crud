@@ -17,6 +17,7 @@ type Identificacion struct {
 	NumeroIdentificacion string              `orm:"column(numero_identificacion)"`
 	FechaExpedicion      time.Time           `orm:"column(fecha_expedicion);type(date);null"`
 	LugarExpedicion      int                 `orm:"column(lugar_expedicion);null"`
+	Soporte              int                 `orm:"column(soporte);null"`
 }
 
 func (t *Identificacion) TableName() string {
