@@ -26,3 +26,4 @@ Definir los valores de las siguientes variables de entorno:
 Ejemplo: API_ENTE_HTTP_PORT=8083 ENTE_CRUD__PGUSER=user ENTE_CRUD__PGPASS=password ENTE_CRUD__PGURLS=localhost ENTE_CRUD__PGDB=udistrital_core_db ENTE_CRUD__SCHEMA=core_new bee run
 
 ## MODELO
+![image](https://github.com/udistrital/ente_crud/blob/develop/modelo_ente_crud.png).
