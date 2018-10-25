@@ -1210,7 +1210,7 @@ definitions:
         $ref: '#/definitions/models.Ente'
       FechaExpedicion:
         type: string
-        format: string
+        format: datetime
       Id:
         type: integer
         format: int64
