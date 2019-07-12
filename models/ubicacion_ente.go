@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -15,6 +16,7 @@ type UbicacionEnte struct {
 	Ente                      *Ente                      `orm:"column(ente);rel(fk)"`
 	TipoRelacionUbicacionEnte *TipoRelacionUbicacionEnte `orm:"column(tipo_relacion_ubicacion_ente);rel(fk)"`
 	Activo                    bool                       `orm:"column(activo)"`
+	FechaModificacion         string                     `orm:"column(fecha_modificacion);null"`
 }
 
 func (t *UbicacionEnte) TableName() string {
@@ -28,6 +30,9 @@ func init() {
 // AddUbicacionEnte insert a new UbicacionEnte into database and returns
 // last inserted Id on success.
 func AddUbicacionEnte(m *UbicacionEnte) (id int64, err error) {
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
@@ -127,6 +132,9 @@ func GetAllUbicacionEnte(query map[string]string, fields []string, sortby []stri
 func UpdateUbicacionEnteById(m *UbicacionEnte) (err error) {
 	o := orm.NewOrm()
 	v := UbicacionEnte{Id: m.Id}
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64

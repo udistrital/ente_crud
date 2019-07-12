@@ -5,13 +5,15 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
 type Ente struct {
-	Id       int       `orm:"column(id);pk;auto"`
-	TipoEnte *TipoEnte `orm:"column(tipo_ente);rel(fk)"`
+	Id                int       `orm:"column(id);pk;auto"`
+	TipoEnte          *TipoEnte `orm:"column(tipo_ente);rel(fk)"`
+	FechaModificacion string    `orm:"column(fecha_modificacion);null"`
 }
 
 func (t *Ente) TableName() string {
@@ -25,6 +27,9 @@ func init() {
 // AddEnte insert a new Ente into database and returns
 // last inserted Id on success.
 func AddEnte(m *Ente) (id int64, err error) {
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
@@ -124,6 +129,9 @@ func GetAllEnte(query map[string]string, fields []string, sortby []string, order
 func UpdateEnteById(m *Ente) (err error) {
 	o := orm.NewOrm()
 	v := Ente{Id: m.Id}
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64

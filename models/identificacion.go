@@ -18,6 +18,7 @@ type Identificacion struct {
 	FechaExpedicion      time.Time           `orm:"column(fecha_expedicion);type(date);null"`
 	LugarExpedicion      int                 `orm:"column(lugar_expedicion);null"`
 	Soporte              int                 `orm:"column(soporte);null"`
+	FechaModificacion    string              `orm:"column(fecha_modificacion);null"`
 }
 
 func (t *Identificacion) TableName() string {
@@ -31,6 +32,9 @@ func init() {
 // AddIdentificacion insert a new Identificacion into database and returns
 // last inserted Id on success.
 func AddIdentificacion(m *Identificacion) (id int64, err error) {
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
@@ -130,6 +134,9 @@ func GetAllIdentificacion(query map[string]string, fields []string, sortby []str
 func UpdateIdentificacionById(m *Identificacion) (err error) {
 	o := orm.NewOrm()
 	v := Identificacion{Id: m.Id}
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64

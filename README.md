@@ -1,29 +1,33 @@
 # ente_crud
-documentacion
---Api de personas con CI--
-CI deploy with lambda - S3
-Drone 0.8 
-ente_crud master/develop
+API de gestión general de entidades (personas y organizaciones)
 
-## Requirements
+Integración con
+
+ - `CI`
+ - `AWS Lambda - S3`
+ - `Drone 1.x`
+ - `ente_crud master/develop`
+
+## Requerimientos
 Go version >= 1.8.
 
-## Preparación:
-    Para usar el API, usar el comando:
-        - go get github.com/udistrital/ente_crud
+## Preparación
+Para usar el API, usar el comando:
 
-## Run
+ - `go get github.com/planesticud/ente_crud`
 
+## Ejecución
 Definir los valores de las siguientes variables de entorno:
 
- - `API_ENTE_HTTP_PORT`: Puerto asignado para la ejecución del API
+ - `ENTE_HTTP_PORT`: Puerto asignado para la ejecución del API
  - `ENTE_CRUD__PGUSER`: Usuario de la base de datos
  - `ENTE_CRUD__PGPASS`: Clave del usuario para la conexión a la base de datos  
  - `ENTE_CRUD__PGURLS`: Host de conexión
  - `ENTE_CRUD__PGDB`: Nombre de la base de datos
  - `ENTE_CRUD__SCHEMA`: Esquema a utilizar en la base de datos
 
-Ejemplo: API_ENTE_HTTP_PORT=8083 ENTE_CRUD__PGUSER=user ENTE_CRUD__PGPASS=password ENTE_CRUD__PGURLS=localhost ENTE_CRUD__PGDB=udistrital_core_db ENTE_CRUD__SCHEMA=core_new bee run
+## Ejemplo
+ENTE_HTTP_PORT=8096 ENTE_CRUD__PGUSER=user ENTE_CRUD__PGPASS=password ENTE_CRUD__PGURLS=localhost ENTE_CRUD__PGDB=bd ENTE_CRUD__SCHEMA=schema_new bee run
 
-## MODELO
-![image](https://github.com/udistrital/ente_crud/blob/develop/modelo_ente_crud.png).
+## Modelo BD
+![image](https://github.com/planesticud/ente_crud/blob/develop/modelo_ente_crud.png).

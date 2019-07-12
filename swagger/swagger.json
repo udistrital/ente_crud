@@ -1760,6 +1760,9 @@
                 "Descripcion": {
                     "type": "string"
                 },
+                "FechaModificacion": {
+                    "type": "string"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
@@ -1780,6 +1783,9 @@
                 "Ente": {
                     "$ref": "#/definitions/models.Ente"
                 },
+                "FechaModificacion": {
+                    "type": "string"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
@@ -1796,6 +1802,9 @@
             "title": "Ente",
             "type": "object",
             "properties": {
+                "FechaModificacion": {
+                    "type": "string"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
@@ -1815,6 +1824,9 @@
                 "FechaExpedicion": {
                     "type": "string",
                     "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string"
                 },
                 "Id": {
                     "type": "integer",
@@ -1849,6 +1861,9 @@
                 "Descripcion": {
                     "type": "string"
                 },
+                "FechaModificacion": {
+                    "type": "string"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
@@ -1873,6 +1888,9 @@
                     "type": "string"
                 },
                 "Descripcion": {
+                    "type": "string"
+                },
+                "FechaModificacion": {
                     "type": "string"
                 },
                 "Id": {
@@ -1901,6 +1919,9 @@
                 "Descripcion": {
                     "type": "string"
                 },
+                "FechaModificacion": {
+                    "type": "string"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
@@ -1927,6 +1948,9 @@
                 "Descripcion": {
                     "type": "string"
                 },
+                "FechaModificacion": {
+                    "type": "string"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
@@ -1950,6 +1974,9 @@
                 "Ente": {
                     "$ref": "#/definitions/models.Ente"
                 },
+                "FechaModificacion": {
+                    "type": "string"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
@@ -1969,6 +1996,9 @@
             "properties": {
                 "AtributoUbicacion": {
                     "$ref": "#/definitions/models.AtributoUbicacion"
+                },
+                "FechaModificacion": {
+                    "type": "string"
                 },
                 "Id": {
                     "type": "integer",
