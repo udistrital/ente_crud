@@ -135,7 +135,7 @@ func UpdateValorAtributoUbicacionById(m *ValorAtributoUbicacion) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m, "Valor"); err == nil {
+		if num, err = o.Update(m, "UbicacionEnte", "AtributoUbicacion", "Valor", "FechaModificacion"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}
