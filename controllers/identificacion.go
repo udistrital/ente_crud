@@ -158,7 +158,7 @@ func (c *IdentificacionController) Put() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateIdentificacionById(&v); err == nil {
 			c.Ctx.Output.SetStatus(200)
-			c.Data["json"] = models.Alert{Type: "success", Code: "S_200", Body: v}
+			c.Data["json"] = v
 		} else {
 			logs.Error(err)
 			//c.Data["development"] = map[string]interface{}{"Code": "400", "Body": err.Error(), "Type": "error"}
