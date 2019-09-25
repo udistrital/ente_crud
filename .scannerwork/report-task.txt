@@ -1,0 +1,6 @@
+projectKey=ente_crud
+serverUrl=http://sonarqube.planestic.udistrital.edu.co:9005
+serverVersion=7.0.0.36138
+dashboardUrl=http://sonarqube.planestic.udistrital.edu.co:9005/dashboard/index/ente_crud
+ceTaskId=AW1qDJP-lGVdvusbrOKu
+ceTaskUrl=http://sonarqube.planestic.udistrital.edu.co:9005/api/ce/task?id=AW1qDJP-lGVdvusbrOKu

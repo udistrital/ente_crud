@@ -1,0 +1,1 @@
+models/atributo_ubicacion.go 2goX¡hrmodels/atributo_ubicacion.go
