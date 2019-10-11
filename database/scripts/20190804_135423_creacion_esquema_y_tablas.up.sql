@@ -413,3 +413,8 @@ ALTER TABLE ente.valor_atributo_ubicacion ADD CONSTRAINT fk_valor_atributo_ubica
 REFERENCES ente.ubicacion_ente (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
+
+-- Permisos de usuario
+GRANT USAGE ON SCHEMA ente TO desarrollooas;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA ente TO desarrollooas;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA ente TO desarrollooas;
