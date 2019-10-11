@@ -1,1 +1,0 @@
-¢!controllers/atributo_ubicacion.go 2goXÅhr!controllers/atributo_ubicacion.go
