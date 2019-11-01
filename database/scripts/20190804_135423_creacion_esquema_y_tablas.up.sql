@@ -49,14 +49,14 @@ COMMENT ON CONSTRAINT uq_nombre_atributo_ubicacion ON ente.atributo_ubicacion  I
 -- DROP TABLE IF EXISTS ente.contacto_ente CASCADE;
 CREATE TABLE ente.contacto_ente (
 	id serial NOT NULL,
-	tipo_contacto_id integer,
-	ente_id integer NOT NULL,
+	tipo_contacto integer,
+	ente integer NOT NULL,
 	valor character varying(200) NOT NULL,
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
 	fecha_modificacion timestamp NOT NULL,
 	CONSTRAINT pk_contacto_ente PRIMARY KEY (id),
-	CONSTRAINT uq_contacto_ente UNIQUE (tipo_contacto_id,ente_id,valor)
+	CONSTRAINT uq_contacto_ente UNIQUE (tipo_contacto,ente,valor)
 
 );
 -- ddl-end --
@@ -64,9 +64,9 @@ COMMENT ON TABLE ente.contacto_ente IS 'Tabla en la que se almacenan los contact
 -- ddl-end --
 COMMENT ON COLUMN ente.contacto_ente.id IS 'Identificador de la tabla contacto_ente';
 -- ddl-end --
-COMMENT ON COLUMN ente.contacto_ente.tipo_contacto_id IS 'identificador de la tabla tipo_contacto';
+COMMENT ON COLUMN ente.contacto_ente.tipo_contacto IS 'identificador de la tabla tipo_contacto';
 -- ddl-end --
-COMMENT ON COLUMN ente.contacto_ente.ente_id IS 'identificador de la tabla ente';
+COMMENT ON COLUMN ente.contacto_ente.ente IS 'identificador de la tabla ente';
 -- ddl-end --
 COMMENT ON COLUMN ente.contacto_ente.valor IS 'Almacena el valor de cada tipo de contacto por ejemplo el numero, email, fax, viper, red social etc.';
 -- ddl-end --
@@ -81,7 +81,7 @@ COMMENT ON COLUMN ente.contacto_ente.fecha_modificacion IS 'Fecha de la última 
 -- DROP TABLE IF EXISTS ente.ente CASCADE;
 CREATE TABLE ente.ente (
 	id serial NOT NULL,
-	tipo_ente_id integer NOT NULL,
+	tipo_ente integer NOT NULL,
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
 	fecha_modificacion timestamp NOT NULL,
@@ -93,7 +93,7 @@ COMMENT ON TABLE ente.ente IS 'tabla que generaliza los entes como personas, org
 -- ddl-end --
 COMMENT ON COLUMN ente.ente.id IS 'Identificador primario de la tabla';
 -- ddl-end --
-COMMENT ON COLUMN ente.ente.tipo_ente_id IS 'Referencia foranea a la tabla tipo_ente';
+COMMENT ON COLUMN ente.ente.tipo_ente IS 'Referencia foranea a la tabla tipo_ente';
 -- ddl-end --
 COMMENT ON COLUMN ente.ente.activo IS 'Indica el estado del registro';
 -- ddl-end --
@@ -108,8 +108,8 @@ COMMENT ON CONSTRAINT pk_ente ON ente.ente  IS 'Restriccion de llave primaria.';
 -- DROP TABLE IF EXISTS ente.identificacion CASCADE;
 CREATE TABLE ente.identificacion (
 	id serial NOT NULL,
-	ente_id integer NOT NULL,
-	tipo_identificacion_id integer,
+	ente integer NOT NULL,
+	tipo_identificacion integer,
 	numero_identificacion character varying(50) NOT NULL,
 	fecha_expedicion date,
 	lugar_expedicion integer,
@@ -118,7 +118,7 @@ CREATE TABLE ente.identificacion (
 	fecha_creacion timestamp NOT NULL,
 	fecha_modificacion timestamp NOT NULL,
 	CONSTRAINT pk_identificacion PRIMARY KEY (id),
-	CONSTRAINT uq_numero_identificacion UNIQUE (tipo_identificacion_id,numero_identificacion)
+	CONSTRAINT uq_numero_identificacion UNIQUE (tipo_identificacion,numero_identificacion)
 
 );
 -- ddl-end --
@@ -126,9 +126,9 @@ COMMENT ON TABLE ente.identificacion IS 'almacena la informacion de identificaci
 -- ddl-end --
 COMMENT ON COLUMN ente.identificacion.id IS 'Identificador de la tabla identificacion';
 -- ddl-end --
-COMMENT ON COLUMN ente.identificacion.ente_id IS 'indentificador de la tabla ente';
+COMMENT ON COLUMN ente.identificacion.ente IS 'indentificador de la tabla ente';
 -- ddl-end --
-COMMENT ON COLUMN ente.identificacion.tipo_identificacion_id IS 'Identificador de la tabla tipo_identificacion.';
+COMMENT ON COLUMN ente.identificacion.tipo_identificacion IS 'Identificador de la tabla tipo_identificacion.';
 -- ddl-end --
 COMMENT ON COLUMN ente.identificacion.numero_identificacion IS 'Número de documento de identificacion de un ente';
 -- ddl-end --
@@ -261,13 +261,13 @@ COMMENT ON CONSTRAINT uq_nombre_tipo_relacion_ubicacion_ente ON ente.tipo_relaci
 CREATE TABLE ente.ubicacion_ente (
 	id serial NOT NULL,
 	lugar integer NOT NULL,
-	ente_id integer NOT NULL,
-	tipo_relacion_ubicacion_ente_id integer NOT NULL,
+	ente integer NOT NULL,
+	tipo_relacion_ubicacion_ente integer NOT NULL,
 	activo boolean NOT NULL DEFAULT true,
 	fecha_creacion timestamp NOT NULL,
 	fecha_modificacion timestamp NOT NULL,
 	CONSTRAINT pk_ubicacion_ente PRIMARY KEY (id),
-	CONSTRAINT uq_ubicacion_ente UNIQUE (lugar,tipo_relacion_ubicacion_ente_id,ente_id)
+	CONSTRAINT uq_ubicacion_ente UNIQUE (lugar,tipo_relacion_ubicacion_ente,ente)
 
 );
 -- ddl-end --
@@ -290,8 +290,8 @@ COMMENT ON CONSTRAINT uq_ubicacion_ente ON ente.ubicacion_ente  IS 'Restricción
 -- DROP TABLE IF EXISTS ente.valor_atributo_ubicacion CASCADE;
 CREATE TABLE ente.valor_atributo_ubicacion (
 	id serial NOT NULL,
-	ubicacion_ente_id integer NOT NULL,
-	atributo_ubicacion_id integer NOT NULL,
+	ubicacion_ente integer NOT NULL,
+	atributo_ubicacion integer NOT NULL,
 	valor character varying(150) NOT NULL,
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
@@ -353,68 +353,68 @@ COMMENT ON CONSTRAINT pk_tipo_contacto ON ente.tipo_contacto  IS 'Constraint de 
 
 -- object: fk_contacto_ente_ente | type: CONSTRAINT --
 -- ALTER TABLE ente.contacto_ente DROP CONSTRAINT IF EXISTS fk_contacto_ente_ente CASCADE;
-ALTER TABLE ente.contacto_ente ADD CONSTRAINT fk_contacto_ente_ente FOREIGN KEY (ente_id)
+ALTER TABLE ente.contacto_ente ADD CONSTRAINT fk_contacto_ente_ente FOREIGN KEY (ente)
 REFERENCES ente.ente (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_contacto_ente_tipo_contacto | type: CONSTRAINT --
 -- ALTER TABLE ente.contacto_ente DROP CONSTRAINT IF EXISTS fk_contacto_ente_tipo_contacto CASCADE;
-ALTER TABLE ente.contacto_ente ADD CONSTRAINT fk_contacto_ente_tipo_contacto FOREIGN KEY (tipo_contacto_id)
+ALTER TABLE ente.contacto_ente ADD CONSTRAINT fk_contacto_ente_tipo_contacto FOREIGN KEY (tipo_contacto)
 REFERENCES ente.tipo_contacto (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: fk_ente_tipo_ente | type: CONSTRAINT --
 -- ALTER TABLE ente.ente DROP CONSTRAINT IF EXISTS fk_ente_tipo_ente CASCADE;
-ALTER TABLE ente.ente ADD CONSTRAINT fk_ente_tipo_ente FOREIGN KEY (tipo_ente_id)
+ALTER TABLE ente.ente ADD CONSTRAINT fk_ente_tipo_ente FOREIGN KEY (tipo_ente)
 REFERENCES ente.tipo_ente (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: fk_identificacion_ente | type: CONSTRAINT --
 -- ALTER TABLE ente.identificacion DROP CONSTRAINT IF EXISTS fk_identificacion_ente CASCADE;
-ALTER TABLE ente.identificacion ADD CONSTRAINT fk_identificacion_ente FOREIGN KEY (ente_id)
+ALTER TABLE ente.identificacion ADD CONSTRAINT fk_identificacion_ente FOREIGN KEY (ente)
 REFERENCES ente.ente (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_identificacion_tipo_identificacion | type: CONSTRAINT --
 -- ALTER TABLE ente.identificacion DROP CONSTRAINT IF EXISTS fk_identificacion_tipo_identificacion CASCADE;
-ALTER TABLE ente.identificacion ADD CONSTRAINT fk_identificacion_tipo_identificacion FOREIGN KEY (tipo_identificacion_id)
+ALTER TABLE ente.identificacion ADD CONSTRAINT fk_identificacion_tipo_identificacion FOREIGN KEY (tipo_identificacion)
 REFERENCES ente.tipo_identificacion (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: fk_ubicacion_ente_ente | type: CONSTRAINT --
 -- ALTER TABLE ente.ubicacion_ente DROP CONSTRAINT IF EXISTS fk_ubicacion_ente_ente CASCADE;
-ALTER TABLE ente.ubicacion_ente ADD CONSTRAINT fk_ubicacion_ente_ente FOREIGN KEY (ente_id)
+ALTER TABLE ente.ubicacion_ente ADD CONSTRAINT fk_ubicacion_ente_ente FOREIGN KEY (ente)
 REFERENCES ente.ente (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: fk_ubicacion_ente_tipo_relacion_ubicacion_ente | type: CONSTRAINT --
 -- ALTER TABLE ente.ubicacion_ente DROP CONSTRAINT IF EXISTS fk_ubicacion_ente_tipo_relacion_ubicacion_ente CASCADE;
-ALTER TABLE ente.ubicacion_ente ADD CONSTRAINT fk_ubicacion_ente_tipo_relacion_ubicacion_ente FOREIGN KEY (tipo_relacion_ubicacion_ente_id)
+ALTER TABLE ente.ubicacion_ente ADD CONSTRAINT fk_ubicacion_ente_tipo_relacion_ubicacion_ente FOREIGN KEY (tipo_relacion_ubicacion_ente)
 REFERENCES ente.tipo_relacion_ubicacion_ente (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: fk_valor_atributo_ubicacion_atributo_ubicacion | type: CONSTRAINT --
 -- ALTER TABLE ente.valor_atributo_ubicacion DROP CONSTRAINT IF EXISTS fk_valor_atributo_ubicacion_atributo_ubicacion CASCADE;
-ALTER TABLE ente.valor_atributo_ubicacion ADD CONSTRAINT fk_valor_atributo_ubicacion_atributo_ubicacion FOREIGN KEY (atributo_ubicacion_id)
+ALTER TABLE ente.valor_atributo_ubicacion ADD CONSTRAINT fk_valor_atributo_ubicacion_atributo_ubicacion FOREIGN KEY (atributo_ubicacion)
 REFERENCES ente.atributo_ubicacion (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: fk_valor_atributo_ubicacion_ubicacion_ente | type: CONSTRAINT --
 -- ALTER TABLE ente.valor_atributo_ubicacion DROP CONSTRAINT IF EXISTS fk_valor_atributo_ubicacion_ubicacion_ente CASCADE;
-ALTER TABLE ente.valor_atributo_ubicacion ADD CONSTRAINT fk_valor_atributo_ubicacion_ubicacion_ente FOREIGN KEY (ubicacion_ente_id)
+ALTER TABLE ente.valor_atributo_ubicacion ADD CONSTRAINT fk_valor_atributo_ubicacion_ubicacion_ente FOREIGN KEY (ubicacion_ente)
 REFERENCES ente.ubicacion_ente (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- Permisos de usuario
-GRANT USAGE ON SCHEMA ente TO desarrollooas;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA ente TO desarrollooas;
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA ente TO desarrollooas;
+--GRANT USAGE ON SCHEMA ente TO desarrollooas;
+--GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA ente TO desarrollooas;
+--GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA ente TO desarrollooas;
