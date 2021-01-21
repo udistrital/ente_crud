@@ -48,8 +48,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.AtributoUbicacion'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - atributo_ubicacion
@@ -65,8 +65,8 @@ paths:
       responses:
         "201":
           description: '{int} models.AtributoUbicacion'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /atributo_ubicacion/{id}:
     get:
       tags:
@@ -84,8 +84,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.AtributoUbicacion'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - atributo_ubicacion
@@ -108,8 +108,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.AtributoUbicacion'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - atributo_ubicacion
@@ -124,8 +124,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /contacto_ente/:
     get:
       tags:
@@ -163,8 +163,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ContactoEnte'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - contacto_ente
@@ -180,8 +180,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ContactoEnte'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /contacto_ente/{id}:
     get:
       tags:
@@ -199,8 +199,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ContactoEnte'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - contacto_ente
@@ -223,8 +223,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ContactoEnte'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - contacto_ente
@@ -239,8 +239,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /ente/:
     get:
       tags:
@@ -278,8 +278,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Ente'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - ente
@@ -295,8 +295,8 @@ paths:
       responses:
         "201":
           description: '{int} models.Ente'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /ente/{id}:
     get:
       tags:
@@ -314,8 +314,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Ente'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - ente
@@ -338,8 +338,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Ente'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - ente
@@ -354,8 +354,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /identificacion/:
     get:
       tags:
@@ -393,8 +393,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Identificacion'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - identificacion
@@ -429,8 +429,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Identificacion'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - identificacion
@@ -453,8 +453,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Identificacion'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - identificacion
@@ -469,8 +469,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /tipo_contacto/:
     get:
       tags:
@@ -508,8 +508,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoContacto'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - tipo_contacto
@@ -525,8 +525,8 @@ paths:
       responses:
         "201":
           description: '{int} models.TipoContacto'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /tipo_contacto/{id}:
     get:
       tags:
@@ -544,8 +544,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoContacto'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - tipo_contacto
@@ -568,8 +568,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoContacto'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - tipo_contacto
@@ -584,8 +584,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /tipo_ente/:
     get:
       tags:
@@ -623,8 +623,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoEnte'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - tipo_ente
@@ -640,8 +640,8 @@ paths:
       responses:
         "201":
           description: '{int} models.TipoEnte'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /tipo_ente/{id}:
     get:
       tags:
@@ -659,8 +659,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoEnte'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - tipo_ente
@@ -683,8 +683,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoEnte'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - tipo_ente
@@ -699,8 +699,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /tipo_identificacion/:
     get:
       tags:
@@ -738,8 +738,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoIdentificacion'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - tipo_identificacion
@@ -755,8 +755,8 @@ paths:
       responses:
         "201":
           description: '{int} models.TipoIdentificacion'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /tipo_identificacion/{id}:
     get:
       tags:
@@ -774,8 +774,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoIdentificacion'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - tipo_identificacion
@@ -798,8 +798,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoIdentificacion'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - tipo_identificacion
@@ -814,8 +814,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /tipo_relacion_ubicacion_ente/:
     get:
       tags:
@@ -853,8 +853,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoRelacionUbicacionEnte'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - tipo_relacion_ubicacion_ente
@@ -870,8 +870,8 @@ paths:
       responses:
         "201":
           description: '{int} models.TipoRelacionUbicacionEnte'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /tipo_relacion_ubicacion_ente/{id}:
     get:
       tags:
@@ -889,8 +889,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoRelacionUbicacionEnte'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - tipo_relacion_ubicacion_ente
@@ -913,8 +913,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoRelacionUbicacionEnte'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - tipo_relacion_ubicacion_ente
@@ -929,8 +929,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /ubicacion_ente/:
     get:
       tags:
@@ -968,8 +968,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.UbicacionEnte'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - ubicacion_ente
@@ -985,8 +985,8 @@ paths:
       responses:
         "201":
           description: '{int} models.UbicacionEnte'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /ubicacion_ente/{id}:
     get:
       tags:
@@ -1004,8 +1004,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.UbicacionEnte'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - ubicacion_ente
@@ -1028,8 +1028,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.UbicacionEnte'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - ubicacion_ente
@@ -1044,8 +1044,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /valor_atributo_ubicacion/:
     get:
       tags:
@@ -1083,8 +1083,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ValorAtributoUbicacion'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - valor_atributo_ubicacion
@@ -1100,8 +1100,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ValorAtributoUbicacion'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /valor_atributo_ubicacion/{id}:
     get:
       tags:
@@ -1119,8 +1119,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ValorAtributoUbicacion'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - valor_atributo_ubicacion
@@ -1143,8 +1143,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ValorAtributoUbicacion'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - valor_atributo_ubicacion
@@ -1159,8 +1159,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
 definitions:
   models.AtributoUbicacion:
     title: AtributoUbicacion
@@ -1171,6 +1171,10 @@ definitions:
       CodigoAbreviacion:
         type: string
       Descripcion:
+        type: string
+      FechaCreacion:
+        type: string
+      FechaModificacion:
         type: string
       Id:
         type: integer
@@ -1186,6 +1190,10 @@ definitions:
     properties:
       Ente:
         $ref: '#/definitions/models.Ente'
+      FechaCreacion:
+        type: string
+      FechaModificacion:
+        type: string
       Id:
         type: integer
         format: int64
@@ -1197,6 +1205,10 @@ definitions:
     title: Ente
     type: object
     properties:
+      FechaCreacion:
+        type: string
+      FechaModificacion:
+        type: string
       Id:
         type: integer
         format: int64
@@ -1208,9 +1220,13 @@ definitions:
     properties:
       Ente:
         $ref: '#/definitions/models.Ente'
+      FechaCreacion:
+        type: string
       FechaExpedicion:
         type: string
-        format: string
+        format: datetime
+      FechaModificacion:
+        type: string
       Id:
         type: integer
         format: int64
@@ -1219,6 +1235,9 @@ definitions:
         format: int64
       NumeroIdentificacion:
         type: string
+      Soporte:
+        type: integer
+        format: int64
       TipoIdentificacion:
         $ref: '#/definitions/models.TipoIdentificacion'
   models.TipoContacto:
@@ -1230,6 +1249,10 @@ definitions:
       CodigoAbreviacion:
         type: string
       Descripcion:
+        type: string
+      FechaCreacion:
+        type: string
+      FechaModificacion:
         type: string
       Id:
         type: integer
@@ -1249,6 +1272,10 @@ definitions:
         type: string
       Descripcion:
         type: string
+      FechaCreacion:
+        type: string
+      FechaModificacion:
+        type: string
       Id:
         type: integer
         format: int64
@@ -1266,6 +1293,10 @@ definitions:
       CodigoAbreviacion:
         type: string
       Descripcion:
+        type: string
+      FechaCreacion:
+        type: string
+      FechaModificacion:
         type: string
       Id:
         type: integer
@@ -1285,6 +1316,10 @@ definitions:
         type: string
       Descripcion:
         type: string
+      FechaCreacion:
+        type: string
+      FechaModificacion:
+        type: string
       Id:
         type: integer
         format: int64
@@ -1301,6 +1336,10 @@ definitions:
         type: boolean
       Ente:
         $ref: '#/definitions/models.Ente'
+      FechaCreacion:
+        type: string
+      FechaModificacion:
+        type: string
       Id:
         type: integer
         format: int64
@@ -1315,6 +1354,10 @@ definitions:
     properties:
       AtributoUbicacion:
         $ref: '#/definitions/models.AtributoUbicacion'
+      FechaCreacion:
+        type: string
+      FechaModificacion:
+        type: string
       Id:
         type: integer
         format: int64

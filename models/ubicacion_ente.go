@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/astaxie/beego/orm"
+	"github.com/udistrital/utils_oas/time_bogota"
 )
 
 type UbicacionEnte struct {
@@ -15,6 +16,8 @@ type UbicacionEnte struct {
 	Ente                      *Ente                      `orm:"column(ente);rel(fk)"`
 	TipoRelacionUbicacionEnte *TipoRelacionUbicacionEnte `orm:"column(tipo_relacion_ubicacion_ente);rel(fk)"`
 	Activo                    bool                       `orm:"column(activo)"`
+	FechaCreacion             string                     `orm:"column(fecha_creacion);null"`
+	FechaModificacion         string                     `orm:"column(fecha_modificacion);null"`
 }
 
 func (t *UbicacionEnte) TableName() string {
@@ -28,6 +31,8 @@ func init() {
 // AddUbicacionEnte insert a new UbicacionEnte into database and returns
 // last inserted Id on success.
 func AddUbicacionEnte(m *UbicacionEnte) (id int64, err error) {
+	m.FechaCreacion = time_bogota.TiempoBogotaFormato()
+	m.FechaModificacion = time_bogota.TiempoBogotaFormato()
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
@@ -127,10 +132,11 @@ func GetAllUbicacionEnte(query map[string]string, fields []string, sortby []stri
 func UpdateUbicacionEnteById(m *UbicacionEnte) (err error) {
 	o := orm.NewOrm()
 	v := UbicacionEnte{Id: m.Id}
+	m.FechaModificacion = time_bogota.TiempoBogotaFormato()
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m, "Lugar"); err == nil {
+		if num, err = o.Update(m, "Lugar", "Ente", "TipoRelacionUbicacionEnte", "Activo", "FechaModificacion"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}
