@@ -14,7 +14,7 @@ Go version >= 1.8.
 ## Preparación
 Para usar el API, usar el comando:
 
- - `go get github.com/planesticud/ente_crud`
+ - `go get github.com/udistrital/ente_crud`
 
 ## Ejecución
 Definir los valores de las siguientes variables de entorno:
@@ -30,4 +30,4 @@ Definir los valores de las siguientes variables de entorno:
 ENTE_HTTP_PORT=8096 ENTE_CRUD__PGUSER=user ENTE_CRUD__PGPASS=password ENTE_CRUD__PGURLS=localhost ENTE_CRUD__PGDB=bd ENTE_CRUD__SCHEMA=schema_new bee run
 
 ## Modelo BD
-![image](https://github.com/planesticud/ente_crud/blob/develop/modelo_ente_crud.png).
+![image](https://github.com/udistrital/ente_crud/blob/develop/modelo_ente_crud.png).
