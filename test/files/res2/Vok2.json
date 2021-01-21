@@ -1,0 +1,12 @@
+{
+  "title": "Example Schema",
+  "type": "object",
+  "properties": {
+    "Id": { "type": "integer" },
+    "TipoContacto":	{ "type": "TipoContacto" },
+    "Ente": { "type": "Ente" },
+    "Valor": { "type": "string" },
+    "FechaCreacion": { "type": "string" },
+    "FechaModificacion": { "type": "string" }
+  }
+}
