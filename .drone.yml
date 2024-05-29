@@ -3,12 +3,15 @@ workspace:
   path: src/github.com/udistrital/${DRONE_REPO##udistrital/}
   when:
       branch:
+      - develop
+      - release
       - master
-      - test
+
 kind: pipeline
-name: API_deploy
+name: oas_api_ci
 
 steps:
+
 #- name: check_readme
 #  image: jjvargass/qa_develoment:latest
 #  commands:
@@ -43,6 +46,7 @@ steps:
     branch:
     - develop
     - feature/*
+    - release
     - hotfix/*
     - release/*
     event:
@@ -86,13 +90,13 @@ steps:
     event:
     - push
 
-- name: run_sonar_scanner
-  image: aosapps/drone-sonar-plugin
-  settings:
-    sonar_host:
-      from_secret: SONAR_HOST
-    sonar_token:
-      from_secret: SONAR_TOKEN
+# - name: run_sonar_scanner
+#   image: aosapps/drone-sonar-plugin
+#   settings:
+#     sonar_host:
+#       from_secret: SONAR_HOST
+#     sonar_token:
+#       from_secret: SONAR_TOKEN
 
 #  - name: beego_migrate
 #    image: golang:1.18
@@ -117,7 +121,7 @@ steps:
 #      - push      
 #
 #  - name: beego_rollback
-#    image: golang:1.9
+#    image: golang:1.18
 #    environment:
 #      PG_MIGRATION_USER:
 #        from_secret: PG_MIGRATION_USER
@@ -138,58 +142,83 @@ steps:
 #      status:
 #        - failure
 
-- name: publish_dockerhub
-  image: plugins/docker
+- name: publish_to_ecr_release
+  image: plugins/ecr
   settings:
-    username:
-      from_secret: DOCKER_USERNAME
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: oas0/${DRONE_REPO##udistrital/}
+    access_key:
+      from_secret: AWS_ACCESS_KEY_ID
+    secret_key:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    region:
+      from_secret: AWS_REGION
+    repo: ${DRONE_REPO##udistrital/}
+    tags:
+      - ${DRONE_COMMIT:0:7}
+      - release
+  when:
+    branch:
+    - release
+    event:
+    - push
+
+- name: publish_to_ecr_master
+  image: plugins/ecr
+  settings:
+    access_key:
+      from_secret: AWS_ACCESS_KEY_ID
+    secret_key:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    region:
+      from_secret: AWS_REGION
+    repo: ${DRONE_REPO##udistrital/}
     tags:
       - ${DRONE_COMMIT:0:7}
       - latest
   when:
     branch:
-      - release/*
-      - master
+    - master
+    event:
+    - push
 
-- name: go-awsecs
-  image: golang:1.18
+- name: update_aws_ecs
+  image: golang:1.9
   environment:
     AWS_ACCESS_KEY_ID:
       from_secret: AWS_ACCESS_KEY_ID
     AWS_SECRET_ACCESS_KEY:
       from_secret: AWS_SECRET_ACCESS_KEY
+    AWS_CONTAINER:
+      from_secret: AWS_CONTAINER
   commands:
-   - case ${DRONE_BRANCH} in
-        test)
-          AMBIENTE=test
-          CLUSTER=test
-          ;;
-        master)
-          AMBIENTE=prod
-          CLUSTER=oas
-          ;;
-     esac
-   - AWS_REGION=us-east-1
-   - SERVICE=${DRONE_REPO##udistrital/}_$AMBIENTE
-   - MYCONTAINER=oas0/${DRONE_REPO##udistrital/}:${DRONE_COMMIT:0:7}
-   - container_name=${DRONE_REPO##udistrital/}
-   - apt-get update
-   - apt-get install unzip
-   - wget https://github.com/Autodesk/go-awsecs/releases/download/v1.1/update-aws-ecs-service-linux-amd64.zip
-   - unzip update-aws-ecs-service-linux-amd64.zip -d /go/bin
-   - AWS_ACCESS_KEY_ID=$${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=$${AWS_SECRET_ACCESS_KEY} AWS_REGION=$AWS_REGION
-     $GOPATH/bin/update-aws-ecs-service -cluster $CLUSTER -service $SERVICE -container-image $container_name=$MYCONTAINER
+  - case ${DRONE_BRANCH} in
+       release)
+         AMBIENTE=test
+         CLUSTER=test
+         MYCONTAINER=$${AWS_CONTAINER}/${DRONE_REPO##udistrital/}:release
+         ;;
+       master)
+         AMBIENTE=prod
+         CLUSTER=oas
+         MYCONTAINER=$${AWS_CONTAINER}/${DRONE_REPO##udistrital/}:latest
+         ;;
+    esac
+  - AWS_REGION=us-east-1
+  - SERVICE=${DRONE_REPO##udistrital/}_$AMBIENTE
+  - container_name=${DRONE_REPO##udistrital/}
+  - apt-get update
+  - apt-get install unzip
+  - wget https://github.com/Autodesk/go-awsecs/releases/download/v1.1/update-aws-ecs-service-linux-amd64.zip
+  - unzip update-aws-ecs-service-linux-amd64.zip -d /go/bin
+  - AWS_ACCESS_KEY_ID=$${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=$${AWS_SECRET_ACCESS_KEY} AWS_REGION=$AWS_REGION
+    $GOPATH/bin/update-aws-ecs-service -cluster $CLUSTER -service $SERVICE -container-image $MYCONTAINER
   when:
     branch:
-    - test
+    - release
     - master
     event:
     - push
 
-- name: NotifyTelegram
+- name: notify_telegram
   image: appleboy/drone-telegram
   settings:
     token:
@@ -199,15 +228,27 @@ steps:
     format: html
     message: >
       {{#success build.status}}
-        <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">SUCCESS</a> 
-        <code>{{commit.branch}}</code>@<a href="{{commit.link}}">{{truncate commit.sha 7}}</a><code> By:{{commit.author}}</code>
+        ✅ <a href="{{build.link}}">SUCCESS</a> <b>Build #{{build.number}}</b>
+        <b>type: </b><code>{{ build.event }}</code>
+        <b>Repo: </b><code>{{repo.name}}</code>
+        <b>Branch: </b><code>{{commit.branch}}</code>
+        <b>Commit: </b><a href="{{commit.link}}">{{truncate commit.sha 7}}</a>
+        <b>Autor: </b>{{commit.author}} <code>&#128526 </code>
       {{else}}
-        <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">FAILURE</a>
-        <code>{{commit.branch}}</code>@<a href="{{commit.link}}">{{truncate commit.sha 7}}</a><code> By:{{commit.author}}</code>
+        ❌ <a href="{{build.link}}">FAILURE</a> <b>Build #{{build.number}}</b>
+        <b>type: </b><code>{{ build.event }}</code>
+        <b>Repo: </b><code>{{repo.name}}</code>
+        <b>Branch: </b><code>{{commit.branch}}</code>
+        <b>Commit: </b><a href="{{commit.link}}">{{truncate commit.sha 7}}</a>
+        <b>Autor: </b>{{commit.author}} <code>&#128549 </code>
       {{/success}}
   when:
     branch:
+    - develop
+    - release
     - master
+    event:
+    - push
     status:
     - failure
     - success
