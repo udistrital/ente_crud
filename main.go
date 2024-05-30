@@ -10,6 +10,7 @@ import (
 	_ "github.com/udistrital/ente_crud/routers"
 	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
 	"github.com/udistrital/utils_oas/customerror"
+	"github.com/udistrital/utils_oas/xray"
 )
 
 func init() {
@@ -41,7 +42,7 @@ func main() {
 	logPath += beego.AppConfig.String("logPath")
 	logPath += "\"}"
 	logs.SetLogger(logs.AdapterFile, logPath)*/
-
+	xray.InitXRay()
 	apistatus.Init()
 	//auditoria.InitMiddleware()
 	beego.ErrorController(&customerror.CustomErrorController{})
